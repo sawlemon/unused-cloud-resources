@@ -16,6 +16,7 @@ func main() {
 	// Load the shared AWS configuration.
 	cfg, err := config.LoadDefaultConfig(context.TODO(),
 		config.WithRegion("us-east-1"),
+		// replace the "limited-admin" with the profile of your choice or completely remove that when running in a Lambda Environment
 		config.WithSharedConfigProfile("limited-admin"),
 	)
 	if err != nil {
