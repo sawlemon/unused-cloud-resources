@@ -23,17 +23,30 @@ func main() {
 		log.Fatalf("Unable to load AWS SDK config: %v", err)
 	}
 
-	fmt.Printf("unused_ebs_volumes %v\n", get_unused_ebs_volumes(cfg))
+	unused_ebs_data := get_unused_ebs_volumes(cfg)
+	fmt.Printf("Unused EBS Volume IDs %s\nTotal Volume Count %d\nUnused Count: %d", 
+		unused_ebs_data.ResourceIDs, 
+		unused_ebs_data.TotalInstancesCount,
+		unused_ebs_data.UnusedInstancesCount,
+	)
 }
 
-func get_unused_ebs_volumes(cfg aws.Config) []string {
+type UnusedResourceMetrics struct {
+	ResourceIDs []string
+	TotalInstancesCount int
+	UnusedInstancesCount int
+}
+
+func get_unused_ebs_volumes(cfg aws.Config) UnusedResourceMetrics {
 	// Create an EC2 service client.
 	svc := ec2.NewFromConfig(cfg)
 
 	// Create a paginator for the DescribeVolumes API call.
 	paginator := ec2.NewDescribeVolumesPaginator(svc, &ec2.DescribeVolumesInput{})
 
-	unattached_volumes := []string{}
+	unused_ebs_volumes := UnusedResourceMetrics{}
+	totalEBScount := 0
+	unusedEBScount := 0
 
 	// Iterate through the pages of results.
 	for paginator.HasMorePages() {
@@ -43,18 +56,22 @@ func get_unused_ebs_volumes(cfg aws.Config) []string {
 		}
 
 		for _, volume := range page.Volumes {
-
+			totalEBScount += 1
 			// volumeJSON, err := json.Marshal(volume)
 			// if err != nil {
 			// 	log.Fatalf("Failed to marshal volume: %v", err)
 			// }
 
 			if len(volume.Attachments) == 0 {
+				unusedEBScount += 1
 				volumeID := aws.ToString(volume.VolumeId)
-				unattached_volumes = append(unattached_volumes, volumeID)
+				unused_ebs_volumes.ResourceIDs = append(unused_ebs_volumes.ResourceIDs, volumeID)
 			}
 		}
 	}
-
-	return unattached_volumes
+	
+	unused_ebs_volumes.TotalInstancesCount = totalEBScount
+	unused_ebs_volumes.UnusedInstancesCount = unusedEBScount
+	
+	return unused_ebs_volumes
 }
