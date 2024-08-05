@@ -5,7 +5,7 @@ go 1.22.5
 require (
 	github.com/aws/aws-sdk-go-v2/config v1.27.27
 	github.com/gin-gonic/gin v1.10.0
-	github.com/sawlemon/unused-cloud-resources/aws_unused_resources v0.0.0-20240805144446-f04f9f06bde9
+	github.com/sawlemon/unused-cloud-resources/aws_unused_resources v0.0.0-20240805152035-9581fe899533
 )
 
 require (
