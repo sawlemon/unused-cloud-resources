@@ -75,10 +75,8 @@ github.com/pelletier/go-toml/v2 v2.2.2 h1:aYUidT7k73Pcl9nb2gScu7NSrKCSHIDE89b3+6
 github.com/pelletier/go-toml/v2 v2.2.2/go.mod h1:1t835xjRzz80PqgE6HHgN2JOsmgYu/h4qDAS4n929Rs=
 github.com/pmezard/go-difflib v1.0.0 h1:4DBwDE0NGyQoBHbLQYPwSUPoCMWR5BEzIk/f1lZbAQM=
 github.com/pmezard/go-difflib v1.0.0/go.mod h1:iKH77koFhYxTK1pcRnkKkqfTogsbg7gZNVY4sRDYZ/4=
-github.com/sawlemon/unused-cloud-resources/aws_unused_resources v0.0.0-20240805144446-f04f9f06bde9 h1:UhyFuoqSIN/yBZ4MV5KGdLW/TOa32MhsHfj3KFlwF5Y=
-github.com/sawlemon/unused-cloud-resources/aws_unused_resources v0.0.0-20240805144446-f04f9f06bde9/go.mod h1:VkgvLgdJ7Lehqhhl8Xk3I0Kf8t2m6NCIQHM7BEhMetM=
-github.com/sawlemon/unused-cloud-resources/aws_unused_resources v0.0.0-20240805152035-9581fe899533 h1:g9202FpnS0BUWwTRGDZCsyq1iBIIrNLLLksALouszDs=
-github.com/sawlemon/unused-cloud-resources/aws_unused_resources v0.0.0-20240805152035-9581fe899533/go.mod h1:7mYacMviw4VA2iaEIYp0qwYK2eps7CnYZd1lZGVYsHU=
+github.com/sawlemon/unused-cloud-resources/aws_unused_resources v0.0.0-20240805152434-ac8c602a1b4a h1:tvJUc9ER6le4N5cp3azq8I1QZbSStObCsrX9WRhhoX4=
+github.com/sawlemon/unused-cloud-resources/aws_unused_resources v0.0.0-20240805152434-ac8c602a1b4a/go.mod h1:7mYacMviw4VA2iaEIYp0qwYK2eps7CnYZd1lZGVYsHU=
 github.com/stretchr/objx v0.1.0/go.mod h1:HFkY916IF+rwdDfMAkV7OtwuqBVzrE8GR6GFx+wExME=
 github.com/stretchr/objx v0.4.0/go.mod h1:YvHI0jy2hoMjB+UWwv71VJQ9isScKT/TqJzVSSt89Yw=
 github.com/stretchr/objx v0.5.0/go.mod h1:Yh+to48EsGEfYuaHDzXPcE3xhTkx73EhmCGUpEOglKo=

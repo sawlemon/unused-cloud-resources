@@ -14,7 +14,7 @@ type UnusedResourceMetrics struct {
 	UnusedInstancesCount int
 }
 
-func get_unused_ebs_volumes(cfg aws.Config) UnusedResourceMetrics {
+func Get_unused_ebs_volumes(cfg aws.Config) UnusedResourceMetrics {
 	// Create an EC2 service client.
 	svc := ec2.NewFromConfig(cfg)
 

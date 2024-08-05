@@ -6,7 +6,7 @@ import (
 	"log"
 	// "encoding/json"
 	"github.com/aws/aws-sdk-go-v2/config"
-	"github.com/sawlemon/unused-cloud-resources/aws_unused_resources"
+	aws_unused "github.com/sawlemon/unused-cloud-resources/aws_unused_resources"
 )
 
 func main() {
@@ -20,7 +20,7 @@ func main() {
 		log.Fatalf("Unable to load AWS SDK config: %v", err)
 	}
 
-	unused_ebs_data := aws_unused_resources.get_unused_ebs_volumes(cfg)
+	unused_ebs_data := aws_unused.Get_unused_ebs_volumes(cfg)
 	fmt.Printf("Unused EBS Volume IDs %s\nTotal Volume Count %d\nUnused Count: %d", 
 		unused_ebs_data.ResourceIDs, 
 		unused_ebs_data.TotalInstancesCount,
