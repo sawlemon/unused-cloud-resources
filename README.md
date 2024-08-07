@@ -30,3 +30,8 @@ go run aws_main.go
 
 go run gcp_auth.go
 ```
+
+# TODO:
+
+- [ ] Refactor GCP module
+- [ ] GCP authentication should be handled different
