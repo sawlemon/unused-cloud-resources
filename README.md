@@ -26,5 +26,7 @@ Unused EBS Volumes will be representd by `Number of EBS Volumes` vs `Total Numbe
 For local testing purposes install Go version `1.22.5` then run.
 
 ```zsh
-go run aws_unused_resources.go
+go run aws_main.go
+
+go run gcp_auth.go
 ```
