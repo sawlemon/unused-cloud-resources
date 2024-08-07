@@ -52,3 +52,7 @@ func Get_unused_ebs_volumes(cfg aws.Config) UnusedResourceMetrics {
 	
 	return unused_ebs_volumes
 }
+
+func Get_unused_other_stuff(someinput int) string {
+	return "this is some other stuff"
+}
