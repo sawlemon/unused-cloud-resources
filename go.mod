@@ -6,6 +6,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/config v1.27.27
 	github.com/gin-gonic/gin v1.10.0
 	github.com/sawlemon/unused-cloud-resources/aws_unused_resources v0.0.0-20240805152434-ac8c602a1b4a
+	github.com/sawlemon/unused-cloud-resources/gcp_unused_resources v0.0.0-20240807144544-c370d3c3ae3f
 )
 
 require (
@@ -48,4 +49,9 @@ require (
 	golang.org/x/text v0.15.0 // indirect
 	google.golang.org/protobuf v1.34.1 // indirect
 	gopkg.in/yaml.v3 v3.0.1 // indirect
+)
+
+replace (
+	github.com/sawlemon/unused-cloud-resources/aws_unused_resources => /Users/sala/Downloads/sawlemon/unused-cloud-resources/aws_unused_resources
+	github.com/sawlemon/unused-cloud-resources/gcp_unused_resources => /Users/sala/Downloads/sawlemon/unused-cloud-resources/gcp_unused_resources
 )
