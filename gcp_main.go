@@ -7,7 +7,7 @@ import (
 )
 
 func main() {
-	unused_disk_data := gcp_unused.Get_Unused_Disks("root-fort-431811-j3", "us-central1-a")
+	unused_disk_data := gcp_unused.Get_Unused_Disks("finops-accelerator", "us-central1-a")
 	fmt.Printf("Unused Disks Name %s\nTotal Disk Count %d\nUnused Disk: %d\n", 
 		unused_disk_data.ResourceIDs, 
 		unused_disk_data.TotalInstancesCount,
