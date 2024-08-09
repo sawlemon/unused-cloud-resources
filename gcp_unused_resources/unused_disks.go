@@ -62,3 +62,52 @@ func Get_Unused_Disks(projectId string, zone string) UnusedResourceMetrics  {
 
 	return unused_disks
 }
+
+func Get_Unused_IPs(projectID string, region string) UnusedResourceMetrics {
+	ctx := context.Background()
+
+	// Create a Compute Service client
+	client, err := compute.NewAddressesRESTClient(ctx)
+	if err != nil {
+		log.Fatalf("Failed to create client: %v", err)
+	}
+	defer client.Close()
+
+	projectID = projectID
+	region = region
+
+	req := &computepb.ListAddressesRequest{
+		// TODO: Fill request struct fields.
+		// See https://pkg.go.dev/cloud.google.com/go/compute/apiv1/computepb#AggregatedListAddressesRequest.
+		Project: projectID,
+		Region: region,
+	}
+
+	unusedIPs := UnusedResourceMetrics{}
+	totalIPCount := 0
+	unusedIPCount := 0
+
+	it := client.List(ctx, req)
+	for {
+		ips, err := it.Next()
+		if err == iterator.Done {
+			break
+		}
+		if err != nil {
+			log.Fatalf("Failed to list ips: %v", err)
+		}
+		
+		totalIPCount += 1
+		// Check if the IP is attached
+		if len(ips.GetUsers()) == 0 {
+			unusedIPCount += 1
+			ipName := ips.GetName()
+			unusedIPs.ResourceIDs = append(unusedIPs.ResourceIDs, ipName)
+		}
+	}
+
+	unusedIPs.TotalInstancesCount = totalIPCount
+	unusedIPs.UnusedInstancesCount = unusedIPCount
+
+	return unusedIPs
+}
