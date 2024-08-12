@@ -3,7 +3,6 @@ module github.com/sawlemon/unused-cloud-resources
 go 1.22.5
 
 require (
-	github.com/aws/aws-sdk-go-v2/config v1.27.27
 	github.com/gin-gonic/gin v1.10.0
 	github.com/sawlemon/unused-cloud-resources/aws_unused_resources v0.0.0-20240805152434-ac8c602a1b4a
 	github.com/sawlemon/unused-cloud-resources/gcp_unused_resources v0.0.0-20240807144544-c370d3c3ae3f
@@ -15,6 +14,7 @@ require (
 	cloud.google.com/go/compute v1.27.4 // indirect
 	cloud.google.com/go/compute/metadata v0.5.0 // indirect
 	github.com/aws/aws-sdk-go-v2 v1.30.3 // indirect
+	github.com/aws/aws-sdk-go-v2/config v1.27.27 // indirect
 	github.com/aws/aws-sdk-go-v2/credentials v1.17.27 // indirect
 	github.com/aws/aws-sdk-go-v2/feature/ec2/imds v1.16.11 // indirect
 	github.com/aws/aws-sdk-go-v2/internal/configsources v1.3.15 // indirect

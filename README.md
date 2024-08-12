@@ -33,5 +33,5 @@ go run gcp_auth.go
 
 # TODO:
 
-- [ ] Refactor GCP module
 - [ ] GCP authentication should be handled different
+- [ ] Handle divide by zero in percentage calculation
