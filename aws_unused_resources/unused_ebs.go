@@ -4,6 +4,7 @@ import (
 	"log"
 	"context"
 	
+	"github.com/aws/aws-sdk-go-v2/config"
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/service/ec2"
 )
@@ -14,7 +15,17 @@ type UnusedResourceMetrics struct {
 	UnusedInstancesCount int
 }
 
-func Get_unused_ebs_volumes(cfg aws.Config) UnusedResourceMetrics {
+func Get_unused_ebs_volumes(region string, profile string) UnusedResourceMetrics {
+	
+	cfg, err := config.LoadDefaultConfig(context.TODO(),
+		config.WithRegion(region),
+		// replace the "limited-admin" with the profile of your choice or completely remove that when running in a Lambda Environment
+		config.WithSharedConfigProfile(profile),
+	)
+	if err != nil {
+		log.Fatalf("Unable to load AWS SDK config: %v", err)
+	}
+
 	// Create an EC2 service client.
 	svc := ec2.NewFromConfig(cfg)
 
