@@ -1,22 +1,21 @@
 package aws_unused_resources
 
 import (
-	"log"
 	"context"
-	
-	"github.com/aws/aws-sdk-go-v2/config"
+	"log"
+
 	"github.com/aws/aws-sdk-go-v2/aws"
+	"github.com/aws/aws-sdk-go-v2/config"
 	"github.com/aws/aws-sdk-go-v2/service/ec2"
 )
 
 type UnusedResourceMetrics struct {
-	ResourceIDs []string
-	TotalInstancesCount int
+	ResourceIDs          []string
+	TotalInstancesCount  int
 	UnusedInstancesCount int
 }
 
 func Get_unused_ebs_volumes(region string) UnusedResourceMetrics {
-	
 	cfg, err := config.LoadDefaultConfig(context.TODO(),
 		config.WithRegion(region),
 		// replace the "limited-admin" with the profile of your choice or completely remove that when running in a Lambda Environment
@@ -57,9 +56,9 @@ func Get_unused_ebs_volumes(region string) UnusedResourceMetrics {
 			}
 		}
 	}
-	
+
 	unused_ebs_volumes.TotalInstancesCount = totalEBScount
 	unused_ebs_volumes.UnusedInstancesCount = unusedEBScount
-	
+
 	return unused_ebs_volumes
 }
