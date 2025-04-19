@@ -53,7 +53,7 @@ func GetUnusedEC2Instances(
 
 	var unused []UnusedInstance
 	for _, inst := range instances {
-		avgCPU, err := getAvgCPU(ctx, cwClient, *inst.InstanceId, days)
+		avgCPU, err := getAvgCPUEC2(ctx, cwClient, *inst.InstanceId, days)
 		if err != nil {
 			// skip on error
 			continue
@@ -102,7 +102,7 @@ func listRunningInstances(
 }
 
 // getAvgCPU retrieves the average CPU utilization metric for an EC2 instance over 'days'.
-func getAvgCPU(
+func getAvgCPUEC2(
 	ctx context.Context,
 	client *cloudwatch.Client,
 	instanceID string,

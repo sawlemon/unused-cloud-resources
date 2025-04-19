@@ -4,10 +4,10 @@ import (
 	"context"
 	"time"
 
-	"github.com/aws-sdk-go-v2/config"
-	cwTypes "github.com/aws-sdk-go-v2/service/cloudwatch/types"
 	"github.com/aws/aws-sdk-go-v2/aws"
+	"github.com/aws/aws-sdk-go-v2/config"
 	"github.com/aws/aws-sdk-go-v2/service/cloudwatch"
+	cwTypes "github.com/aws/aws-sdk-go-v2/service/cloudwatch/types"
 	"github.com/aws/aws-sdk-go-v2/service/rds"
 	rdsTypes "github.com/aws/aws-sdk-go-v2/service/rds/types"
 )
@@ -29,11 +29,11 @@ func GetUnusedRDSInstances(
 	region string, // AWS region
 	threshold float64, // Average CPU utilization (%)
 	days int, // Number of days to consider for CPU usage
-) ([]UnusedRDS, UnusedResourceMetrics, error) {
+) (UnusedResourceMetrics, error) {
 	// Load AWS configuration
 	cfg, err := config.LoadDefaultConfig(ctx, config.WithRegion(region))
 	if err != nil {
-		return nil, UnusedResourceMetrics{}, err
+		return UnusedResourceMetrics{}, err
 	}
 	rdsClient := rds.NewFromConfig(cfg)
 	cwClient := cloudwatch.NewFromConfig(cfg)
@@ -41,7 +41,7 @@ func GetUnusedRDSInstances(
 	// List all RDS instances
 	instances, err := listAllDBInstances(ctx, rdsClient)
 	if err != nil {
-		return nil, UnusedResourceMetrics{}, err
+		return UnusedResourceMetrics{}, err
 	}
 
 	metrics := UnusedResourceMetrics{
@@ -52,7 +52,7 @@ func GetUnusedRDSInstances(
 	var unused []UnusedRDS
 
 	for _, db := range instances {
-		avgCPU, err := getAvgCPU(ctx, cwClient, *db.DBInstanceIdentifier, days)
+		avgCPU, err := getAvgCPURDS(ctx, cwClient, *db.DBInstanceIdentifier, days)
 		if err != nil {
 			continue
 		}
@@ -92,7 +92,7 @@ func GetUnusedRDSInstances(
 		}
 	}
 
-	return unused, metrics, nil
+	return metrics, nil
 }
 
 // listAllDBInstances retrieves all RDS DB instances in the account for the given region.
@@ -112,8 +112,8 @@ func listAllDBInstances(
 	return result, nil
 }
 
-// getAvgCPU retrieves the average CPU utilization for an RDS instance over 'days'.
-func getAvgCPU(
+// getAvgCPURDS retrieves the average CPU utilization for an RDS instance over 'days'.
+func getAvgCPURDS(
 	ctx context.Context,
 	client *cloudwatch.Client,
 	dbIdentifier string,

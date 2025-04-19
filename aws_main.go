@@ -1,13 +1,5 @@
 package main
 
-import (
-	"context"
-	"fmt"
-	"log"
-
-	aws_unused "github.com/sawlemon/unused-cloud-resources/aws_unused_resources"
-)
-
 func main() {
 
 	// unused_ebs_data := aws_unused.Get_unused_ebs_volumes("us-east-1")
@@ -44,13 +36,24 @@ func main() {
 	// 	unused_vpcs_data.UnusedInstancesCount,
 	// )
 
-	unused_rds_data, err := aws_unused.GetUnusedRDSInstances(context.Background(), "us-east-1", 5.0, 7)
-	if err != nil {
-		log.Fatal(err)
-	}
-	fmt.Printf("\nUnused S3 Buckets %s\nTotal Volume Count %d\nUnused Count: %d",
-		unused_rds_data.ResourceIDs,
-		unused_rds_data.TotalInstancesCount,
-		unused_rds_data.UnusedInstancesCount,
-	)
+	// unused_rds_data, err := aws_unused.GetUnusedRDSInstances(context.Background(), "us-east-1", 5.0, 7)
+	// if err != nil {
+	// 	log.Fatal(err)
+	// }
+	// fmt.Printf("\nUnused RDS Instances %s\nTotal RDS Instances Count %d\nUnused Count: %d",
+	// 	unused_rds_data.ResourceIDs,
+	// 	unused_rds_data.TotalInstancesCount,
+	// 	unused_rds_data.UnusedInstancesCount,
+	// )
+
+	// unused_lbs_data, err := aws_unused.GetUnusedLoadBalancers(context.Background(), "us-east-1", 100, 7)
+	// if err != nil {
+	// 	log.Fatal(err)
+	// }
+	// fmt.Printf("\nUnused Load Balancers %s\nTotal LBs Count %d\nUnused Count: %d",
+	// 	unused_lbs_data.ResourceIDs,
+	// 	unused_lbs_data.TotalInstancesCount,
+	// 	unused_lbs_data.UnusedInstancesCount,
+	// )
+
 }
