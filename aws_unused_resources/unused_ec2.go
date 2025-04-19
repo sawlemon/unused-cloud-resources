@@ -1,4 +1,4 @@
-package ec2unused
+package aws_unused_resources
 
 import (
 	"context"
@@ -11,13 +11,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/service/ec2"
 	ec2Types "github.com/aws/aws-sdk-go-v2/service/ec2/types"
 )
-
-// UnusedResourceMetrics captures summary counts and IDs of underutilized resources.
-type UnusedResourceMetrics struct {
-	ResourceIDs          []string // IDs of unused instances
-	TotalInstancesCount  int      // total running instances examined
-	UnusedInstancesCount int      // number of instances below threshold
-}
 
 // UnusedInstance holds detailed info about a low-usage EC2 instance.
 type UnusedInstance struct {
@@ -40,7 +33,7 @@ func GetUnusedEC2Instances(
 	// Load AWS config for specified region
 	cfg, err := config.LoadDefaultConfig(ctx, config.WithRegion(region))
 	if err != nil {
-		return nil, UnusedResourceMetrics{}, err
+		return UnusedResourceMetrics{}
 	}
 	ec2Client := ec2.NewFromConfig(cfg)
 	cwClient := cloudwatch.NewFromConfig(cfg)
@@ -48,7 +41,7 @@ func GetUnusedEC2Instances(
 	// Fetch all running instances
 	instances, err := listRunningInstances(ctx, ec2Client)
 	if err != nil {
-		return nil, UnusedResourceMetrics{}, err
+		return UnusedResourceMetrics{}
 	}
 
 	// Initialize metrics
