@@ -34,13 +34,23 @@ func main() {
 	// 	unused_s3_data.UnusedInstancesCount,
 	// )
 
-	unused_vpcs_data, err := aws_unused.GetUnusedVPCs(context.Background(), "us-east-1", 0)
+	// unused_vpcs_data, err := aws_unused.GetUnusedVPCs(context.Background(), "us-east-1", 0)
+	// if err != nil {
+	// 	log.Fatal(err)
+	// }
+	// fmt.Printf("\nUnused S3 Buckets %s\nTotal Volume Count %d\nUnused Count: %d",
+	// 	unused_vpcs_data.ResourceIDs,
+	// 	unused_vpcs_data.TotalInstancesCount,
+	// 	unused_vpcs_data.UnusedInstancesCount,
+	// )
+
+	unused_rds_data, err := aws_unused.GetUnusedRDSInstances(context.Background(), "us-east-1", 5.0, 7)
 	if err != nil {
 		log.Fatal(err)
 	}
 	fmt.Printf("\nUnused S3 Buckets %s\nTotal Volume Count %d\nUnused Count: %d",
-		unused_vpcs_data.ResourceIDs,
-		unused_vpcs_data.TotalInstancesCount,
-		unused_vpcs_data.UnusedInstancesCount,
+		unused_rds_data.ResourceIDs,
+		unused_rds_data.TotalInstancesCount,
+		unused_rds_data.UnusedInstancesCount,
 	)
 }
