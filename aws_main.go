@@ -1,5 +1,12 @@
 package main
 
+import (
+	"context"
+	"fmt"
+
+	aws_unused "github.com/sawlemon/unused-cloud-resources/aws_unused_resources"
+)
+
 func main() {
 
 	// unused_ebs_data := aws_unused.Get_unused_ebs_volumes("us-east-1")
@@ -9,12 +16,15 @@ func main() {
 	// 	unused_ebs_data.UnusedInstancesCount,
 	// )
 
-	// unused_ec2_data := aws_unused.GetUnusedEC2Instances(context.Background(), "us-east-1", 5.0, 7)
-	// fmt.Printf("\nUnused EC2 Instances IDs %s\nTotal Volume Count %d\nUnused Count: %d",
-	// 	unused_ec2_data.ResourceIDs,
-	// 	unused_ec2_data.TotalInstancesCount,
-	// 	unused_ec2_data.UnusedInstancesCount,
-	// )
+	unused_ec2_data := aws_unused.GetUnusedEC2Instances(context.Background(),
+		"us-east-1",
+		5.0,
+		7)
+	fmt.Printf("\nUnused EC2 Instances IDs %s\nTotal Volume Count %d\nUnused Count: %d",
+		unused_ec2_data.ResourceIDs,
+		unused_ec2_data.TotalInstancesCount,
+		unused_ec2_data.UnusedInstancesCount,
+	)
 
 	// unused_s3_data, err := aws_unused.GetUnusedS3Buckets(context.Background(), "us-east-1", 1, 7)
 	// if err != nil {
@@ -55,5 +65,4 @@ func main() {
 	// 	unused_lbs_data.TotalInstancesCount,
 	// 	unused_lbs_data.UnusedInstancesCount,
 	// )
-
 }
